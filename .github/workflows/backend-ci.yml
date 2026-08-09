@@ -14,6 +14,21 @@ jobs:
     name: Build Spring Boot Application
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: personal_library_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres -d personal_library_test"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     defaults:
       run:
         working-directory: personal-library-backend
@@ -30,4 +45,6 @@ jobs:
           cache: maven
 
       - name: Build and test
+        env:
+          SPRING_PROFILES_ACTIVE: test
         run: ./mvnw clean verify
