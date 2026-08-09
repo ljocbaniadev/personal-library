@@ -1,0 +1,190 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #292929 0%, #171717 70%);
+}
+
+.login-card {
+  width: 400px;
+  padding: 24px;
+  background: #242424;
+  border: 1px solid #c9a227;
+  box-shadow: 0 0 25px rgba(201, 162, 39, 0.2);
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+mat-card-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: #c9a227;
+}
+
+mat-card-subtitle {
+  color: #d6cfc0 !important;
+  text-align: center;
+  font-size: 16px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.login-button {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #c9a227 !important;
+  color: #1a1a1a !important;
+
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  transition: background-color 0.3s ease;
+}
+
+.login-button mat-spinner {
+  display: inline-block;
+}
+
+.login-button:hover {
+  background-color: #e7c75f !important;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: #d6cfc0;
+}
+
+mat-card-actions a {
+  color: #c9a227;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+mat-card-actions a:hover {
+  color: #e7c75f;
+  text-decoration: underline;
+}
+
+mat-card-actions a:visited {
+  color: #c9a227;
+}
+
+mat-label {
+  color: #d6cfc0 !important;
+}
+
+input {
+  color: #f4ead7 !important;
+}
+
+.login-error {
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  background: rgba(211, 47, 47, 0.12);
+  border: 1px solid rgba(211, 47, 47, 0.35);
+  border-radius: 6px;
+  color: #ff8a80;
+  font-size: 14px;
+  text-align: center;
+}
+
+.login-error mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.login-card-wrapper {
+  position: relative;
+  width: 400px;
+}
+
+.login-card.loading {
+  filter: blur(2px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(18, 18, 18, 0.88);
+  backdrop-filter: blur(5px);
+
+  border: 1px solid #c9a227;
+  border-radius: 8px;
+
+  z-index: 1000;
+
+  animation: fadeIn 0.25s ease;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.loading-content h3 {
+  margin-top: 22px;
+  margin-bottom: 8px;
+
+  color: #c9a227;
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+}
+
+.loading-content p {
+  margin: 0;
+
+  color: #d6cfc0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+}
+
+:host ::ng-deep .mat-mdc-progress-spinner circle {
+  stroke: #c9a227;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

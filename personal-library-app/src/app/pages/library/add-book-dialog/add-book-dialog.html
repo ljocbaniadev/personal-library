@@ -1,0 +1,118 @@
+<h2 mat-dialog-title>
+  {{ data?.book ? 'Edit Book' : 'Add Book' }}
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="bookForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+
+      <input matInput formControlName="title" />
+
+      @if (bookForm.get('title')?.hasError('required') && bookForm.get('title')?.touched) {
+        <mat-error> Title is required </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Country</mat-label>
+
+      <mat-select formControlName="country">
+        <mat-option value="KR"> KR </mat-option>
+        <mat-option value="JP"> JP </mat-option>
+        <mat-option value="CN"> CN </mat-option>
+        <mat-option value="EN"> EN </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Genre</mat-label>
+
+      <mat-select formControlName="genre">
+        <mat-option value="Romance"> Romance </mat-option>
+        <mat-option value="Action"> Action </mat-option>
+        <mat-option value="Chill"> Chill </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Protagonist</mat-label>
+
+      <mat-select formControlName="protagonist">
+        <mat-option value="Male"> Male </mat-option>
+        <mat-option value="Female"> Female </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Period</mat-label>
+
+      <mat-select formControlName="timePeriod">
+        <mat-option value="Ancient"> Ancient </mat-option>
+        <mat-option value="Modern"> Modern </mat-option>
+        <mat-option value="Future"> Future </mat-option>
+        <mat-option value="Medieval"> Medieval </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+
+      <mat-select formControlName="status">
+        <mat-option value="Completed"> Completed </mat-option>
+        <mat-option value="In-Progress"> In-Progress </mat-option>
+        <mat-option value="Dropped"> Dropped </mat-option>
+        <mat-option value="BookMark"> BookMark </mat-option>
+      </mat-select>
+      @if (bookForm.get('status')?.hasError('required') && bookForm.get('status')?.touched) {
+        <mat-error> Status is required </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Rating</mat-label>
+
+      <mat-select formControlName="rating">
+        <mat-option value="Favorite"> Favorite </mat-option>
+        <mat-option value="Best"> Best </mat-option>
+        <mat-option value="Good"> Good </mat-option>
+        <mat-option value="Mid"> Mid </mat-option>
+        <mat-option value="Bad"> Bad </mat-option>
+        <mat-option value="Not For Me"> Not For Me </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+
+      <mat-select formControlName="bookType">
+        <mat-option value="Novel"> Novel </mat-option>
+        <mat-option value="Manhwa"> Manhwa </mat-option>
+        <mat-option value="Manga"> Manga </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tags</mat-label>
+      <input matInput formControlName="tags" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Chapter</mat-label>
+      <input matInput type="number" formControlName="chapter" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Comment</mat-label>
+      <textarea matInput rows="3" formControlName="comment"> </textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Cancel</button>
+
+  <button mat-raised-button class="save-button" type="button" (click)="saveBook()">
+    {{ data?.book ? 'Save Changes' : 'Add Book' }}
+  </button>
+</mat-dialog-actions>

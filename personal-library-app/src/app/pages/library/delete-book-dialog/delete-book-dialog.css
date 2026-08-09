@@ -1,0 +1,22 @@
+mat-dialog-content {
+  text-align: center;
+  padding-top: 10px;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--library-gold);
+  font-family: 'Cinzel', serif;
+}
+
+h3 {
+  color: var(--library-text);
+  margin: 20px 0;
+  font-family: 'Cinzel', serif;
+}
+
+small {
+  color: var(--library-muted);
+}

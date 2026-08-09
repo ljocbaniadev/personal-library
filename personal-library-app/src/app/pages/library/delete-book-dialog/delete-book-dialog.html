@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>
+  <mat-icon color="warn"> warning </mat-icon>
+  Archive This Tome
+</h2>
+
+<mat-dialog-content>
+  <p>The knowledge contained within this record will disappear from your collection forever.</p>
+  <h3>"{{ data.title }}"</h3>
+  <small> This action cannot be undone. </small>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="warn" (click)="delete()">Delete</button>
+</mat-dialog-actions>

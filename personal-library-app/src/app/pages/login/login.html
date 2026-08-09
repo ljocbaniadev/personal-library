@@ -1,0 +1,61 @@
+<div class="login-page">
+  <div class="login-card-wrapper">
+    <mat-card class="login-card" [class.loading]="loading()">
+      <mat-card-header>
+        <mat-card-title>Personal Library</mat-card-title>
+
+        <mat-card-subtitle> Login to your Account </mat-card-subtitle>
+      </mat-card-header>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-card-content>
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+
+            <input matInput formControlName="username" type="text" [disabled]="loading()" />
+
+            @if (
+              loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched
+            ) {
+              <mat-error> Username is required. </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+
+            <input matInput formControlName="password" type="password" [disabled]="loading()" />
+
+            @if (
+              loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched
+            ) {
+              <mat-error> Password is required. </mat-error>
+            }
+          </mat-form-field>
+
+          <button mat-raised-button class="login-button" type="submit" [disabled]="loading()">
+            Login
+          </button>
+        </mat-card-content>
+      </form>
+
+      <mat-card-actions>
+        <span>Don't have an account?</span>
+
+        <a routerLink="/register"> Register </a>
+      </mat-card-actions>
+    </mat-card>
+
+    @if (loading()) {
+      <div class="loading-overlay">
+        <div class="loading-content">
+          <mat-spinner diameter="70" strokeWidth="4"> </mat-spinner>
+
+          <h3>Consulting the Gray Fog...</h3>
+
+          <p>Please wait while your pathway opens.</p>
+        </div>
+      </div>
+    }
+  </div>
+</div>

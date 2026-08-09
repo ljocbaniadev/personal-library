@@ -1,0 +1,54 @@
+# =========================================
+# Angular
+# =========================================
+
+personal-library-app/node_modules/
+personal-library-app/.angular/
+personal-library-app/dist/
+
+
+# =========================================
+# Spring Boot / Maven
+# =========================================
+
+personal-library-backend/target/
+
+
+# =========================================
+# IntelliJ IDEA
+# =========================================
+
+personal-library-backend/.idea/
+*.iml
+
+
+# =========================================
+# VS Code
+# =========================================
+
+personal-library-app/.vscode/
+
+
+# =========================================
+# Local Spring Boot configuration
+# =========================================
+
+personal-library-backend/src/main/resources/application-local.properties
+
+
+# =========================================
+# Environment / Secrets
+# =========================================
+
+.env
+.env.*
+*.env
+
+
+# =========================================
+# OS generated files
+# =========================================
+
+.DS_Store
+Thumbs.db
+desktop.ini

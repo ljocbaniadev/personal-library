@@ -1,0 +1,25 @@
+<mat-toolbar class="navbar">
+  <span class="app-title"> Personal Library </span>
+
+  <span class="spacer"></span>
+
+  <button mat-icon-button>
+    <mat-icon>notifications</mat-icon>
+  </button>
+
+  <button mat-icon-button [matMenuTriggerFor]="userMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #userMenu="matMenu" panelClass="library-menu">
+    <button mat-menu-item disabled>
+      <mat-icon>menu_book</mat-icon>
+      <span>Archivist</span>
+    </button>
+
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Leave the Archive</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

@@ -1,0 +1,186 @@
+<div class="library-container">
+  <div class="library-header">
+    <div>
+      <h1>Personal Library</h1>
+
+      <p>Your collection of stories and adventures</p>
+    </div>
+
+    <button mat-raised-button class="add-button" (click)="openAddBookDialog()">Add Book</button>
+  </div>
+
+  <div class="library-filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Country</mat-label>
+      <mat-select [(ngModel)]="selectedCountry" (selectionChange)="applyFilter()">
+        @for (country of countries; track country) {
+          <mat-option [value]="country">
+            {{ country }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Period</mat-label>
+      <mat-select [(ngModel)]="selectedPeriod" (selectionChange)="applyFilter()">
+        @for (period of periods; track period) {
+          <mat-option [value]="period">
+            {{ period }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="selectedStatus" (selectionChange)="applyFilter()">
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">
+            {{ status }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="search-section">
+      <mat-form-field appearance="outline" class="search-box">
+        <mat-label>Search Tome</mat-label>
+        <input
+          matInput
+          [(ngModel)]="searchText"
+          (input)="applyFilter()"
+          placeholder="Search Tome..."
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <button
+        mat-stroked-button
+        class="clear-button"
+        (click)="clearFilters()"
+        [disabled]="!hasActiveFilters()"
+      >
+        <mat-icon>auto_awesome</mat-icon>
+        Clear Archive
+      </button>
+    </div>
+  </div>
+  <div class="table-container">
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+          <td mat-cell *matCellDef="let books" class="title-cell">
+            {{ books.title }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="country">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+          <td mat-cell *matCellDef="let books">
+            {{ books.country }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="genre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Genre</th>
+          <td mat-cell *matCellDef="let books">
+            {{ books.genre }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="protagonist">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Protagonist</th>
+          <td mat-cell *matCellDef="let books">
+            {{ books.protagonist }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="timePeriod">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Period</th>
+          <td mat-cell *matCellDef="let books">
+            {{ books.timePeriod }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+          <td mat-cell class="status-cell" *matCellDef="let books">
+            {{ books.status }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rating">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
+          <td mat-cell *matCellDef="let books">
+            {{ books.rating }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="bookType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+          <td mat-cell *matCellDef="let books">
+            {{ books.bookType }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tags">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tags</th>
+          <td mat-cell *matCellDef="let books">
+            {{ books.tags }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="chapter">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Chapter</th>
+          <td mat-cell *matCellDef="let books">
+            {{ books.chapter }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="comment">
+          <th mat-header-cell *matHeaderCellDef>Comment</th>
+          <td mat-cell class="truncate-cell" *matCellDef="let books">
+            {{ books.comment }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let book" class="action-buttons-container">
+            <button mat-icon-button class="edit-button" (click)="openEditBookDialog(book)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="delete-button" (click)="openDeleteBookDialog(book)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="empty-table" [attr.colspan]="displayedColumns.length">
+            @if (books.length === 0) {
+              <mat-icon>menu_book</mat-icon>
+              <h2>Your library is empty</h2>
+              <p>You haven't added any books yet.</p>
+              <button mat-raised-button class="add-button" (click)="openAddBookDialog()">
+                Add Your First Book
+              </button>
+            } @else {
+              <mat-icon>search_off</mat-icon>
+              <h2>No results found</h2>
+              <p>No tomes match your current filters.</p>
+            }
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>

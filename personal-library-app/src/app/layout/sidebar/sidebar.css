@@ -1,0 +1,25 @@
+mat-nav-list {
+  width: 220px;
+  height: 100%;
+  background: #211f1c;
+  border-right: 1px solid #c9a227;
+}
+
+a {
+  color: #d6cfc0 !important;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+}
+
+a:hover {
+  background: #302d27 !important;
+  color: #c9a227 !important;
+}
+
+mat-icon {
+  color: #c9a227 !important;
+}
+
+.mat-mdc-list-item-title {
+  color: #d6cfc0 !important;
+}

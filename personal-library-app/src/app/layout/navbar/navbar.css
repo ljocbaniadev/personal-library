@@ -1,0 +1,40 @@
+.navbar {
+  background: #1a1a1a;
+  border-bottom: 1px solid #c9a227;
+  color: #c9a227;
+}
+
+.app-title {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-icon {
+  color: #c9a227;
+}
+
+.navbar button {
+  transition: all 0.25s ease;
+}
+
+.navbar button:hover {
+  background: rgba(201, 162, 39, 0.1);
+}
+
+.navbar button:hover mat-icon {
+  color: var(--library-gold-light);
+}
+
+.library-menu .mat-mdc-menu-item:last-child:hover {
+  background: rgba(160, 45, 45, 0.18);
+}
+
+.library-menu .mat-mdc-menu-item:last-child:hover .mat-icon,
+.library-menu .mat-mdc-menu-item:last-child:hover span {
+  color: #d86a6a;
+}

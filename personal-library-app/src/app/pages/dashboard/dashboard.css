@@ -1,0 +1,449 @@
+.dashboard-container {
+  color: #d6cfc0;
+  padding: 32px;
+}
+
+.dashboard-header {
+  margin-bottom: 32px;
+}
+
+.dashboard-header h1 {
+  font-family: 'Cinzel', serif;
+  color: var(--library-gold);
+  font-size: 32px;
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.dashboard-header p {
+  margin: 0;
+  color: var(--library-muted);
+  font-size: 18px;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 22px;
+
+  background: var(--library-surface);
+
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--library-gold);
+
+  box-shadow: 0 0 15px rgba(201, 162, 39, 0.15);
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  background: var(--library-surface-dark);
+
+  border: 1px solid var(--library-gold);
+  border-radius: 50%;
+}
+
+.stat-icon mat-icon {
+  color: var(--library-gold);
+
+  font-size: 26px;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  color: var(--library-muted);
+
+  font-size: 16px;
+}
+
+.stat-content h2 {
+  margin: 0;
+
+  color: var(--library-text);
+
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  margin-top: 28px;
+}
+
+.tarot-section,
+.recent-section {
+  min-height: 390px;
+
+  padding: 24px;
+
+  background: var(--library-surface);
+
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title mat-icon {
+  color: var(--library-gold);
+}
+
+.section-title h2 {
+  margin: 0;
+
+  color: var(--library-gold);
+
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.section-subtitle {
+  margin: 6px 0 20px;
+
+  color: var(--library-muted);
+
+  font-size: 16px;
+}
+
+.tarot-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tarot-section .section-title,
+.tarot-section .section-subtitle {
+  align-self: flex-start;
+}
+
+.tarot-card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+  perspective: 1000px;
+}
+
+.tarot-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 230px;
+  min-height: 340px;
+
+  box-sizing: border-box;
+
+  padding: 20px 18px;
+
+  text-align: center;
+
+  background: var(--library-surface-dark);
+
+  border: 1px solid var(--library-gold);
+  border-radius: 6px;
+
+  box-shadow: 0 0 20px rgba(201, 162, 39, 0.15);
+}
+
+.tarot-card-back {
+  position: relative;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 230px;
+  height: 340px;
+
+  padding: 0;
+
+  background:
+    linear-gradient(135deg, transparent 48%, rgba(201, 162, 39, 0.08) 49%, transparent 51%),
+    var(--library-surface-dark);
+}
+
+.tarot-card-back::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 8px;
+
+  border: 1px solid var(--library-gold);
+}
+
+.tarot-symbol {
+  color: var(--library-gold);
+
+  font-size: 54px;
+}
+
+.tarot-card-back span {
+  margin-top: 8px;
+
+  color: var(--library-gold);
+
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+}
+
+.tarot-card-back small {
+  margin-top: 6px;
+
+  color: var(--library-muted);
+
+  font-size: 10px;
+}
+
+.tarot-card.revealed {
+  animation: reveal-card 0.5s ease;
+}
+
+.tarot-card-symbol {
+  margin-bottom: 4px;
+
+  color: var(--library-gold);
+
+  font-size: 36px;
+}
+
+.tarot-card-label {
+  margin-bottom: 8px;
+
+  color: var(--library-muted);
+
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.tarot-card h3 {
+  margin: 0 0 14px;
+
+  color: var(--library-gold);
+
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+}
+
+.tarot-divider {
+  width: 70%;
+
+  margin-bottom: 14px;
+
+  border-top: 1px solid var(--library-gold);
+}
+
+.tarot-card h4 {
+  margin: 0 0 6px;
+
+  color: var(--library-text);
+
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+}
+
+.tarot-pathway {
+  margin-bottom: 16px;
+
+  color: var(--library-muted);
+
+  font-size: 12px;
+}
+
+.tarot-card p {
+  max-width: 190px;
+
+  margin: 0;
+
+  color: var(--library-text);
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.draw-button {
+  margin-top: 16px;
+
+  background: var(--library-gold) !important;
+
+  color: #171717 !important;
+
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+}
+
+.draw-button mat-icon {
+  color: #171717 !important;
+}
+
+.recent-books {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.recent-book {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 14px;
+
+  background: var(--library-surface-dark);
+
+  border: 1px solid #333;
+  border-radius: 6px;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.recent-book:hover {
+  transform: translateX(4px);
+
+  border-color: var(--library-gold);
+}
+
+.book-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  background: #171717;
+
+  border: 1px solid var(--library-gold);
+  border-radius: 50%;
+}
+
+.book-icon mat-icon {
+  color: var(--library-gold);
+}
+
+.book-info h3 {
+  margin: 0 0 4px;
+
+  color: var(--library-text);
+
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+}
+
+.book-info span {
+  color: var(--library-muted);
+
+  font-size: 14px;
+}
+
+@keyframes reveal-card {
+  from {
+    opacity: 0;
+    transform: rotateY(90deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotateY(0);
+  }
+}
+
+@media (max-width: 1000px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 26px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty-books {
+  height: 230px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  color: var(--library-muted);
+}
+
+.empty-books mat-icon {
+  font-size: 60px;
+  width: 60px;
+  height: 60px;
+
+  color: var(--library-gold);
+
+  margin-bottom: 12px;
+}
+
+.empty-books h3 {
+  margin: 0;
+
+  color: var(--library-gold);
+
+  font-family: 'Cinzel', serif;
+}
+
+.empty-books p {
+  width: 250px;
+  margin-top: 10px;
+}

@@ -1,0 +1,36 @@
+:host {
+  display: block;
+}
+
+mat-dialog-content {
+  max-height: 65vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  box-sizing: border-box;
+  padding-top: 12px !important;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-form-field:first-child,
+mat-form-field:last-child {
+  grid-column: span 2;
+}
+
+mat-dialog-actions {
+  padding: 8px 24px 16px;
+}
+
+.save-button {
+  background: #c9a227 !important;
+  color: #171717 !important;
+}

@@ -1,0 +1,102 @@
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(
+    circle at center,
+    #292929 0%,
+    #171717 70%
+  );
+}
+
+.register-card {
+  width: 400px;
+  padding: 24px;
+  background: #242424;
+  border: 1px solid #c9a227;
+  box-shadow: 0 0 25px rgba(201, 162, 39, 0.2);
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+mat-card-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: #c9a227;
+}
+
+mat-card-subtitle {
+  color: #d6cfc0 !important;
+  text-align: center;
+  font-size: 16px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.register-button {
+  width: 100%;
+  height: 48px;
+
+  background-color: #c9a227 !important;
+  color: #1a1a1a !important;
+
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+  background-color: #e7c75f !important;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: #d6cfc0;
+}
+
+mat-label {
+  color: #d6cfc0 !important;
+}
+
+input {
+  color: #f4ead7 !important;
+}
+
+mat-card-actions a {
+  color: #c9a227;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+mat-card-actions a:hover {
+  color: #e7c75f;
+  text-decoration: underline;
+}
+
+mat-card-actions a:visited {
+  color: #c9a227;
+}
