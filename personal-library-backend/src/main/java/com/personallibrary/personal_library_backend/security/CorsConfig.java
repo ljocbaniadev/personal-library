@@ -19,7 +19,7 @@ public class CorsConfig {
 
         configuration.setAllowedOrigins(
                 List.of("http://localhost:4200",
-                        "https://personal-library-4wsv.onrender.com"));
+                        "https://personal-library-app-ev6c.onrender.com"));
 
         configuration.setAllowedMethods(
                 List.of(
