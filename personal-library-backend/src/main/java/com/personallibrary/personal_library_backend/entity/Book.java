@@ -37,6 +37,8 @@ public class Book {
 
     private Double chapter;
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String comment;
 
     @ManyToOne(fetch = FetchType.LAZY)
