@@ -30,6 +30,7 @@ export class AddBookDialog implements OnInit {
     'Fantasy',
     'Cultivation',
     'Comedy',
+    'Medical',
     'Mystery',
     'Thriller',
     'Horror',
