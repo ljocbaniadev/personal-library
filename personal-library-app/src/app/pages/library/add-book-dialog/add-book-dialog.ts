@@ -20,9 +20,29 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './add-book-dialog.html',
   styleUrl: './add-book-dialog.css',
 })
-export class AddBookDialog {
+export class AddBookDialog implements OnInit {
   bookForm!: FormGroup;
 
+  readonly genreOptions: string[] = [
+    'Romance',
+    'Action',
+    'Chill',
+    'Fantasy',
+    'Cultivation',
+    'Comedy',
+    'Mystery',
+    'Thriller',
+    'Horror',
+    'Psychological',
+    'Post-Apocalyptic',
+    'Sports',
+    'Mecha',
+    'Harem',
+    'Reverse Harem',
+    'BL',
+    'GL',
+    'Other',
+  ];
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddBookDialog>,

@@ -29,9 +29,11 @@
       <mat-label>Genre</mat-label>
 
       <mat-select formControlName="genre">
-        <mat-option value="Romance"> Romance </mat-option>
-        <mat-option value="Action"> Action </mat-option>
-        <mat-option value="Chill"> Chill </mat-option>
+        @for (genre of genreOptions; track genre) {
+          <mat-option [value]="genre">
+            {{ genre }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
 
