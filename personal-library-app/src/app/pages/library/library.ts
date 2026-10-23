@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -40,7 +40,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   templateUrl: './library.html',
   styleUrl: './library.css',
 })
-export class Library implements AfterViewInit {
+export class Library {
   private bookService = inject(BookService);
   private notification = inject(NotificationService);
   isLoading = signal(false);
@@ -74,20 +74,26 @@ export class Library implements AfterViewInit {
 
   dataSource = new MatTableDataSource(this.books);
 
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort)
+  set matSort(sort: MatSort) {
+    if (sort) {
+      this.dataSource.sort = sort;
+    }
+  }
+
+  @ViewChild(MatPaginator)
+  set matPaginator(paginator: MatPaginator) {
+    if (paginator) {
+      paginator.pageSize = 10;
+      paginator.pageIndex = 0;
+      this.dataSource.paginator = paginator;
+    }
+  }
 
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadBooks();
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.paginator.pageSize = 10;
-    this.paginator.pageIndex = 0;
   }
 
   loadBooks(): void {
