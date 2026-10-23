@@ -247,3 +247,36 @@ mat-paginator {
 ::ng-deep .mat-mdc-paginator button[aria-disabled='false'] {
   color: var(--library-gold);
 }
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  padding: 32px 16px;
+  text-align: center;
+  gap: 12px;
+  color: var(--text, #d6cfc0);
+}
+
+.loading-container h2,
+.loading-container p {
+  margin: 0;
+}
+
+.loading-container p {
+  color: var(--muted, #a9a29a);
+}
+
+.saving-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background: var(--surface, #242424);
+  color: var(--text, #d6cfc0);
+}

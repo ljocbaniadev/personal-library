@@ -17,6 +17,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotificationService } from '../../services/notification.service';
+import { signal } from '@angular/core';
+import { finalize } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-library',
@@ -32,6 +35,7 @@ import { NotificationService } from '../../services/notification.service';
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './library.html',
   styleUrl: './library.css',
@@ -39,6 +43,10 @@ import { NotificationService } from '../../services/notification.service';
 export class Library implements AfterViewInit {
   private bookService = inject(BookService);
   private notification = inject(NotificationService);
+  isLoading = signal(false);
+  isSaving = signal(false);
+
+  savingAction = signal<'add' | 'edit' | 'delete' | null>(null);
 
   displayedColumns: string[] = [
     'title',
@@ -83,20 +91,29 @@ export class Library implements AfterViewInit {
   }
 
   loadBooks(): void {
-    this.bookService.getBooks().subscribe({
-      next: (response) => {
-        this.books = response.data;
-        this.dataSource.data = [...this.books];
-        this.countries = ['All', ...new Set(this.books.map((x) => x.country).filter(Boolean))];
-        this.periods = ['All', ...new Set(this.books.map((x) => x.timePeriod).filter(Boolean))];
-        this.statuses = ['All', ...new Set(this.books.map((x) => x.status).filter(Boolean))];
-        this.initializeFilter();
-        this.dataSource.sort = this.sort;
-      },
-    });
+    this.isLoading.set(true);
+    this.bookService
+      .getBooks()
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: (response) => {
+          this.books = response.data;
+          this.dataSource.data = [...this.books];
+          this.countries = ['All', ...new Set(this.books.map((x) => x.country).filter(Boolean))];
+          this.periods = ['All', ...new Set(this.books.map((x) => x.timePeriod).filter(Boolean))];
+          this.statuses = ['All', ...new Set(this.books.map((x) => x.status).filter(Boolean))];
+          this.initializeFilter();
+          this.dataSource.sort = this.sort;
+        },
+        error: (error) => {
+          console.error('Failed to load books', error);
+          this.notification.error('Failed to load your library. Please try again.');
+        },
+      });
   }
 
   openAddBookDialog(): void {
+    if (this.isSaving()) return;
     const dialogRef = this.dialog.open(AddBookDialog, {
       width: '600px',
       maxWidth: '95vw',
@@ -108,20 +125,31 @@ export class Library implements AfterViewInit {
       if (!request) {
         return;
       }
+      this.isSaving.set(true);
+      this.savingAction.set('add');
 
-      this.bookService.createBook(request).subscribe({
-        next: () => {
-          this.loadBooks();
-          this.notification.success('📚 A new tome has been archived.');
-        },
-        error: () => {
-          this.notification.error('Failed to archive the tome.');
-        },
-      });
+      this.bookService
+        .createBook(request)
+        .pipe(
+          finalize(() => {
+            this.isSaving.set(false);
+            this.savingAction.set(null);
+          }),
+        )
+        .subscribe({
+          next: () => {
+            this.notification.success('📚 A new tome has been archived.');
+            this.loadBooks();
+          },
+          error: () => {
+            this.notification.error('Failed to archive the tome.');
+          },
+        });
     });
   }
 
   openEditBookDialog(book: Book): void {
+    if (this.isSaving()) return;
     const dialogRef = this.dialog.open(AddBookDialog, {
       width: '600px',
       maxWidth: '95vw',
@@ -137,21 +165,32 @@ export class Library implements AfterViewInit {
       if (!updatedBook) {
         return;
       }
+      this.isSaving.set(true);
+      this.savingAction.set('edit');
 
-      this.bookService.updateBook(book.id, updatedBook).subscribe({
-        next: () => {
-          this.loadBooks();
-          this.notification.success('✒️ The tome has been revised.');
-        },
-        error: (error) => {
-          console.error(error);
-          this.notification.error('Failed to revise the tome.');
-        },
-      });
+      this.bookService
+        .updateBook(book.id, updatedBook)
+        .pipe(
+          finalize(() => {
+            this.isSaving.set(false);
+            this.savingAction.set(null);
+          }),
+        )
+        .subscribe({
+          next: () => {
+            this.notification.success('✒️ The tome has been revised.');
+            this.loadBooks();
+          },
+          error: (error) => {
+            console.error(error);
+            this.notification.error('Failed to revise the tome.');
+          },
+        });
     });
   }
 
   openDeleteBookDialog(book: Book): void {
+    if (this.isSaving()) return;
     const dialogRef = this.dialog.open(DeleteBookDialog, {
       width: '420px',
       panelClass: 'library-dialog',
@@ -164,17 +203,27 @@ export class Library implements AfterViewInit {
       if (!confirmed) {
         return;
       }
+      this.isSaving.set(true);
+      this.savingAction.set('delete');
 
-      this.bookService.deleteBook(book.id).subscribe({
-        next: () => {
-          this.loadBooks();
-          this.notification.success('🗑️ The tome has been removed from the Archive.');
-        },
-        error: (error) => {
-          console.error(error);
-          this.notification.error('Failed to remove the tome.');
-        },
-      });
+      this.bookService
+        .deleteBook(book.id)
+        .pipe(
+          finalize(() => {
+            this.isSaving.set(false);
+            this.savingAction.set(null);
+          }),
+        )
+        .subscribe({
+          next: () => {
+            this.notification.success('🗑️ The tome has been removed from the Archive.');
+            this.loadBooks();
+          },
+          error: (error) => {
+            console.error(error);
+            this.notification.error('Failed to remove the tome.');
+          },
+        });
     });
   }
 

@@ -4,10 +4,13 @@ import { inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Book } from '../../models/book/book';
+import { signal } from '@angular/core';
+import { finalize } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -17,6 +20,8 @@ export class Dashboard implements OnInit {
   inProgressBooks = 0;
   completedBooks = 0;
   favoriteBooks = 0;
+  isLoading = signal(false);
+  hasLoadError = signal(false);
 
   recentlyAddedBooks: Book[] = [];
 
@@ -102,19 +107,25 @@ export class Dashboard implements OnInit {
   }
 
   loadDashboard(): void {
-    this.dashboardService.getDashboard().subscribe({
-      next: (response) => {
-        this.totalBooks = response.data.totalBooks;
-        this.inProgressBooks = response.data.inProgressBooks;
-        this.completedBooks = response.data.completedBooks;
-        this.favoriteBooks = response.data.favoriteBooks;
-        this.recentlyAddedBooks = response.data.recentlyAddedBooks;
-      },
+    this.isLoading.set(true);
+    this.hasLoadError.set(false);
+    this.dashboardService
+      .getDashboard()
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: (response) => {
+          this.totalBooks = response.data.totalBooks;
+          this.inProgressBooks = response.data.inProgressBooks;
+          this.completedBooks = response.data.completedBooks;
+          this.favoriteBooks = response.data.favoriteBooks;
+          this.recentlyAddedBooks = response.data.recentlyAddedBooks;
+        },
 
-      error: (error) => {
-        console.error(error);
-      },
-    });
+        error: (error) => {
+          console.error('Failed to load dashboard', error);
+          this.hasLoadError.set(true);
+        },
+      });
   }
 
   drawTarotCard(): void {
