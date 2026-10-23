@@ -86,8 +86,8 @@ export class Library implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-
     this.paginator.pageSize = 10;
+    this.paginator.pageIndex = 0;
   }
 
   loadBooks(): void {
