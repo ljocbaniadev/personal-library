@@ -109,7 +109,6 @@ export class Library {
           this.periods = ['All', ...new Set(this.books.map((x) => x.timePeriod).filter(Boolean))];
           this.statuses = ['All', ...new Set(this.books.map((x) => x.status).filter(Boolean))];
           this.initializeFilter();
-          this.dataSource.sort = this.sort;
         },
         error: (error) => {
           console.error('Failed to load books', error);
